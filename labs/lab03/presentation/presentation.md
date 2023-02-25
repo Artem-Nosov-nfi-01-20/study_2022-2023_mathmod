@@ -31,29 +31,29 @@ $$ {dy\over {dt}} = -0,331x(t)y(t)-0,665y(t)+cos(t)+2 $$
 
 Был написан код на Julia 
 
-![Код программы](./image/Screenshot_1.png){#fig:001 width=50%}
+![Код программы](./image/Screenshot_1.png)
 
 ---
 График, построенные программамы для первой задачи.
 
-![Результат работы на Julia](./image/graph1.png){#fig:003 width=40%} |
+![Результат работы на Julia](./image/graph1.png) 
 ---
 График,программамы построенный для второго условия.
 
-![Результат работы на Julia](./image/graph2.png){#fig:003 width=40%} |
+![Результат работы на Julia](./image/graph2.png) 
 ---
 ## OpenModelica 
 
 Был написан код на OpenModelica
 
-![Код программы](./image/Screenshot_1.png){#fig:002 width=50%}
+![Код программы](./image/Screenshot_1.png)
 
 ---
 График, построенные программамы для первой задачи.
 
-![Результат работы на OpenModelica](./image/photo_2023-02-25_03-50-10.jpg){#fig:003 width=40%} |
+![Результат работы на OpenModelica](./image/photo_2023-02-25_03-50-10.jpg) 
 ---
 График,программамы построенный для второго условия.
 
-![Результат работы на OpenModelica](./image/photo_2023-02-25_03-49-38.jpg){#fig:003 width=40%} |
+![Результат работы на OpenModelica](./image/photo_2023-02-25_03-49-38.jpg) 
 
