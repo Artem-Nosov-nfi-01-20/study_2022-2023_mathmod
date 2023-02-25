@@ -153,7 +153,8 @@ xlabel("time")
 ylabel("army Y")
 title("Партизанская армия Y")
 savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab03\\image\\graph2_y.png")
-clf()```
+clf()
+```
 
 Результат:
 ![Параметрический график численности армии Y от численности армии X пересекается с осью *ox* в значении около (15000; 0), что обозначает победу армии X](./image/graph1.png){#fig:001}
@@ -186,7 +187,8 @@ clf()```
     
   annotation(experiment(StartTime=0, StopTime=1, Tolerance=1e-6, Interval=0.05));  
   
-end modelf;```
+end modelf;
+```
 
 
 
@@ -208,7 +210,8 @@ end modelf;```
     
   annotation(experiment(StartTime=0, StopTime=1, Tolerance=1e-6, Interval=0.05));  
   
-end modelf;```
+end modelf;
+```
 
 Результат:
 ![График изменений численности армии Y от численности армии X идёт лежит на оси *ox*, что обозначает близкую к моментальной победу армии X](./image/photo_2023-02-25_03-50-10.jpg){#fig:008}
