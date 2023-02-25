@@ -50,9 +50,9 @@ $$ {dy\over {dt}} = -0,331x(t)y(t)-0,665y(t)+cos(t)+2 $$
 ---
 График, построенные программамы для первой задачи.
 
-![Результат работы на OpenModelica](./image/graph1.png){#fig:003 width=40%} |
+![Результат работы на OpenModelica](./image/photo_2023-02-25_03-50-10.jpg){#fig:003 width=40%} |
 ---
 График,программамы построенный для второго условия.
 
-![Результат работы на OpenModelica](./image/graph1.png){#fig:003 width=40%} |
+![Результат работы на OpenModelica](./image/photo_2023-02-25_03-49-38.jpg){#fig:003 width=40%} |
 
