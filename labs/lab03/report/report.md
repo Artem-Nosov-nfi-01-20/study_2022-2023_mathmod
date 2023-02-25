@@ -91,7 +91,8 @@ $$ {dy\over {dt}} = -cx(t)y(t)-hy(t)+Q(t) $$
 ### Julia
 #### Программный код решения на Julia
 Код программы:
-```using PyPlot;
+```
+using PyPlot;
 using DifferentialEquations;
 function AvsA!(du, u, p, t)
     du[1] = -0.49*u[1] -0.688*u[2] + abs(cos(2*t))
@@ -189,7 +190,8 @@ clf()
 
 #### Регулярная армия X vs регулярная армия Y
 Код программы:
-```model modelf
+```
+model modelf
 
   parameter Real a(start=0.49);
   parameter Real b(start=0.688);
@@ -216,7 +218,8 @@ end modelf;
 
 #### Регулярная армия X vs партизанская армия Y
 Код программы:
-```model modelf
+```
+model modelf
 
   parameter Real a(start=0.255);
   parameter Real b(start=0.774);
