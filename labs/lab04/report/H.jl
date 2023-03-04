@@ -14,7 +14,7 @@ u0 = [0.5, 0.0]
 tspan = (0.0, 55.0)
 
 prob = ODEProblem(harm_oscillator_without_damping, u0, tspan)
-sol = solve(prob, dtmax=0.05)
+sol = solve(prob, Tsit5())
 
 x =[tu[1] for tu in sol.u]
 y =[tu[2] for tu in sol.u]
@@ -23,6 +23,11 @@ clf()
 plot(x, y)
 title("Определяем уравнение гармонического осциллятора без затуханий и без внешней силы")
 savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g1.png")
+clf()
+plot(sol.t, x,color="red")
+plot(sol.t, y,color="black")
+title("Определяем уравнение гармонического осциллятора без затуханий и без внешней силы")
+savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g1_1.png")
 clf()
 
 
@@ -38,7 +43,7 @@ tspan = (0.0, 55.0)
 
 # Решаем уравнение гармонического осциллятора с затуханием и без внешней силы
 prob = ODEProblem(harm_oscillator_with_damping, u0, tspan)
-sol = solve(prob, dtmax=0.05)
+sol = solve(prob, Tsit5())
 
 x =[tu[1] for tu in sol.u]
 y =[tu[2] for tu in sol.u]
@@ -47,6 +52,11 @@ clf()
 plot(x, y)
 title("Определяем уравнение гармонического осциллятора с затуханием и без внешней силы")
 savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g2.png")
+clf()
+plot(sol.t, x,color="red")
+plot(sol.t, y,color="black")
+title("Определяем уравнение гармонического осциллятора c затуханий и без внешней силы")
+savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g2_1.png")
 clf()
 
 
@@ -62,7 +72,7 @@ tspan = (0.0, 55.0)
 
 # Решаем уравнение гармонического осциллятора с затуханием и под воздействванием внешней силы
 prob = ODEProblem(harm_oscillator_with_external_force, u0, tspan)
-sol = solve(prob, dtmax=0.05)
+sol = solve(prob, Tsit5())
 
 x =[tu[1] for tu in sol.u]
 y =[tu[2] for tu in sol.u]
@@ -71,4 +81,9 @@ clf()
 plot(x, y)
 title("Определяем уравнение гармонического осциллятора с затуханием и под воздействием внешней силы")
 savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g3.png")
+clf()
+plot(sol.t, x,color="red")
+plot(sol.t, y,color="black")
+title("Определяем уравнение гармонического осциллятора с затуханием и под воздействием внешней силы")
+savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g3_1.png")
 clf()

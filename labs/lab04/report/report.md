@@ -63,8 +63,6 @@ $\begin{cases}x(t_0) = x_0 \\y(t_0) = y_0$
 using DifferentialEquations
 using PyPlot;
 
-
-
 # Определяем уравнение гармонического осциллятора без затуханий и без внешней силы
 function harm_oscillator_without_damping(du, u, p, t)
     du[1] = u[2]
@@ -86,12 +84,6 @@ plot(x, y)
 title("Определяем уравнение гармонического осциллятора без затуханий и без внешней силы")
 savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g1.png")
 clf()
-plot(sol.t, x,color="red")
-plot(sol.t, y,color="black")
-title("Определяем уравнение гармонического осциллятора без затуханий и без внешней силы")
-savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g1_1.png")
-clf()
-
 
 # Определяем уравнение гармонического осциллятора с затуханием и без внешней силы
 function harm_oscillator_with_damping(du, u, p, t)
@@ -114,11 +106,6 @@ clf()
 plot(x, y)
 title("Определяем уравнение гармонического осциллятора с затуханием и без внешней силы")
 savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g2.png")
-clf()
-plot(sol.t, x,color="red")
-plot(sol.t, y,color="black")
-title("Определяем уравнение гармонического осциллятора c затуханий и без внешней силы")
-savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g2_1.png")
 clf()
 
 
@@ -143,11 +130,6 @@ clf()
 plot(x, y)
 title("Определяем уравнение гармонического осциллятора с затуханием и под воздействием внешней силы")
 savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g3.png")
-clf()
-plot(sol.t, x,color="red")
-plot(sol.t, y,color="black")
-title("Определяем уравнение гармонического осциллятора с затуханием и под воздействием внешней силы")
-savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g3_1.png")
 clf()
 ```
 
