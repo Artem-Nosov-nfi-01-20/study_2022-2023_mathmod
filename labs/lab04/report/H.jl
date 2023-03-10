@@ -1,89 +1,54 @@
-using DifferentialEquations
 using PyPlot;
-
-
-
-# Определяем уравнение гармонического осциллятора без затуханий и без внешней силы
-function harm_oscillator_without_damping(du, u, p, t)
-    du[1] = u[2]
-    du[2] = -5.5 * u[1]
+using DifferentialEquations;
+function HiZge!(du, u, p, t)
+    du[1] = (-0.64)*u[1] + 0.056*u[1]*u[2]
+    du[2] = 0.46*u[2] - 0.054*u[1]*u[2]
 end
+const u0 = Float64[8.0, 27.0]
+const uostac = Float64[0.46/0.054, 0.64/0.056]
+const p = []
+const tspan = [0.0, 100.0]
 
-# Определяем начальные условия
-u0 = [0.5, 0.0]
-tspan = (0.0, 55.0)
+prob1 = ODEProblem(HiZge!,u0,tspan, p)
+prob2 = ODEProblem(HiZge!,uostac,tspan, p)
+sol1 = solve(prob1, dtmax=0.05)
+sol2 = solve(prob2, dtmax=0.05)
 
-prob = ODEProblem(harm_oscillator_without_damping, u0, tspan)
-sol = solve(prob, Tsit5())
+R1 = [tu[1] for tu in sol1.u]
+R2 = [tu[2] for tu in sol1.u]
 
-x =[tu[1] for tu in sol.u]
-y =[tu[2] for tu in sol.u]
 
 clf()
-plot(x, y)
-title("Определяем уравнение гармонического осциллятора без затуханий и без внешней силы")
-savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g1.png")
-clf()
-plot(sol.t, x,color="red")
-plot(sol.t, y,color="black")
-title("Определяем уравнение гармонического осциллятора без затуханий и без внешней силы")
-savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g1_1.png")
+plot(R2, R1)
+xlabel("Жертвы, шт")
+ylabel("Хищники, шт")
+title("Численность жертв в зависимости от хищников")
+savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab05\\report\\image\\g1.png")
 clf()
 
-
-# Определяем уравнение гармонического осциллятора с затуханием и без внешней силы
-function harm_oscillator_with_damping(du, u, p, t)
-    du[1] = u[2]
-    du[2] = -0.5 * u[2] - 5 * u[1]
-end
-
-# Определяем начальные условия для второго случая
-u0 = [0.5, -0.5]
-tspan = (0.0, 55.0)
-
-# Решаем уравнение гармонического осциллятора с затуханием и без внешней силы
-prob = ODEProblem(harm_oscillator_with_damping, u0, tspan)
-sol = solve(prob, Tsit5())
-
-x =[tu[1] for tu in sol.u]
-y =[tu[2] for tu in sol.u]
-
-clf()
-plot(x, y)
-title("Определяем уравнение гармонического осциллятора с затуханием и без внешней силы")
-savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g2.png")
-clf()
-plot(sol.t, x,color="red")
-plot(sol.t, y,color="black")
-title("Определяем уравнение гармонического осциллятора c затуханий и без внешней силы")
-savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g2_1.png")
+plot(sol1.t, R1, label="Хищники", color="crimson")
+plot(sol1.t, R2, label="Жертвы", color="darkblue")
+xlabel("Время")
+title("Число хищников и жертв в зависимости от времени")
+legend(loc=1)
+savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab05\\report\\image\\g2.png")
 clf()
 
-
-# Определяем уравнение гармонического осциллятора с затуханием и под воздействием внешней силы
-function harm_oscillator_with_external_force(du, u, p, t)
-    du[1] = u[2]
-    du[2] = -5 * u[2] - 0.5 * u[1] + 0.5 * cos(5 * t)
-end
-
-# Определяем начальные условия для третьего случая
-u0 = [-0.5, 0.5]
-tspan = (0.0, 55.0)
-
-# Решаем уравнение гармонического осциллятора с затуханием и под воздействванием внешней силы
-prob = ODEProblem(harm_oscillator_with_external_force, u0, tspan)
-sol = solve(prob, Tsit5())
-
-x =[tu[1] for tu in sol.u]
-y =[tu[2] for tu in sol.u]
+R1 = [tu[1] for tu in sol2.u]
+R2 = [tu[2] for tu in sol2.u]
 
 clf()
-plot(x, y)
-title("Определяем уравнение гармонического осциллятора с затуханием и под воздействием внешней силы")
-savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g3.png")
+plot(R2, R1, "ro")
+xlabel("Жертвы, шт")
+ylabel("Хищники, шт")
+title("Численность жертв в зависимости от хищников")
+savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab05\\report\\image\\g3.png")
 clf()
-plot(sol.t, x,color="red")
-plot(sol.t, y,color="black")
-title("Определяем уравнение гармонического осциллятора с затуханием и под воздействием внешней силы")
-savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab04\\image\\g3_1.png")
+
+plot(sol2.t, R1, label="Хищники", color="crimson")
+plot(sol2.t, R2, label="Жертвы", color="darkblue")
+xlabel("Время")
+title("Число хищников и жертв в зависимости от времени")
+legend()
+savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab05\\report\\image\\g4.png")
 clf()
