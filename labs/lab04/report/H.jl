@@ -1,54 +1,61 @@
-using PyPlot;
-using DifferentialEquations;
-function HiZge!(du, u, p, t)
-    du[1] = (-0.64)*u[1] + 0.056*u[1]*u[2]
-    du[2] = 0.46*u[2] - 0.054*u[1]*u[2]
+using Plots
+
+# Constants
+const G = 6.67430e-11  # Gravitational constant [m^3 kg^-1 s^-2]
+const M_sun = 1.98847e30  # Solar mass [kg]
+const M_J = 1.89819e27  # Jupiter mass [kg]
+const R_J = 6.9911e7  # Jupiter radius [m]
+const R_inner = 0.1 * 1.496e11  # Inner boundary [m]
+const R_outer = 100 * 1.496e11  # Outer boundary [m]
+const M_star = 1 * M_sun  # Stellar mass [kg]
+
+# Functions
+function get_rho(r)
+    if r < 5 * R_J
+        return 2.0
+    elseif r < 50 * R_J
+        return 1.0
+    else
+        return 0.5
+    end
 end
-const u0 = Float64[8.0, 27.0]
-const uostac = Float64[0.46/0.054, 0.64/0.056]
-const p = []
-const tspan = [0.0, 100.0]
 
-prob1 = ODEProblem(HiZge!,u0,tspan, p)
-prob2 = ODEProblem(HiZge!,uostac,tspan, p)
-sol1 = solve(prob1, dtmax=0.05)
-sol2 = solve(prob2, dtmax=0.05)
+function get_m(p, r)
+    rho = get_rho(r)
+    return 4.0/3.0 * pi * (p^3 - (p-1)^3) * rho * r^3
+end
 
-R1 = [tu[1] for tu in sol1.u]
-R2 = [tu[2] for tu in sol1.u]
+function get_r_acc(m)
+    return 2.0 * G * M_star / (3.0 * m)
+end
 
+# Initialization
+p = 2.0  # Initial density profile parameter
+r = R_inner  # Initial radius
+m = get_m(p, r)  # Initial mass
+r_acc = get_r_acc(m)  # Initial accretion radius
 
-clf()
-plot(R2, R1)
-xlabel("Жертвы, шт")
-ylabel("Хищники, шт")
-title("Численность жертв в зависимости от хищников")
-savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab05\\report\\image\\g1.png")
-clf()
+r_values = [r]
+m_values = [m]
 
-plot(sol1.t, R1, label="Хищники", color="crimson")
-plot(sol1.t, R2, label="Жертвы", color="darkblue")
-xlabel("Время")
-title("Число хищников и жертв в зависимости от времени")
-legend(loc=1)
-savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab05\\report\\image\\g2.png")
-clf()
+while r < R_outer
+    # Accretion
+    delta_m = 0.0
+    delta_r = r_acc / 10.0
+    while delta_m < 0.9 * r_acc
+        delta_m += get_m(p, r + delta_r) - get_m(p, r)
+        r += delta_r
+    end
+    m += delta_m
+    r_acc = get_r_acc(m)
 
-R1 = [tu[1] for tu in sol2.u]
-R2 = [tu[2] for tu in sol2.u]
+    # Update density profile parameter
+    p = p + 0.01 * randn()
 
-clf()
-plot(R2, R1, "ro")
-xlabel("Жертвы, шт")
-ylabel("Хищники, шт")
-title("Численность жертв в зависимости от хищников")
-savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab05\\report\\image\\g3.png")
-clf()
+    # Save values
+    push!(r_values, r)
+    push!(m_values, m)
+end
 
-plot(sol2.t, R1, label="Хищники", color="crimson")
-plot(sol2.t, R2, label="Жертвы", color="darkblue")
-xlabel("Время")
-title("Число хищников и жертв в зависимости от времени")
-legend()
-savefig("C:\\Users\\HyperPC\\Documents\\GitHub\\study_2022-2023_mathmod\\labs\\lab05\\report\\image\\g4.png")
-clf()
+# Plot the results
+plot(r_values, m_values, xaxis=:log, yaxis=:log, xlabel="Radius [m]", ylabel="Mass [kg]", legend=false)
